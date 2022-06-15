@@ -1,0 +1,74 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}People Who Paint People{% endblock %}</title>
+        <link href="{% static 'network/styles.css' %}" rel="stylesheet">
+        <link href="{% static 'network/reset.css' %}" rel="stylesheet">
+        <link  rel="picture"   href="../../static/Images" type="image/png" />
+        <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+    </head>
+    
+    <body>
+        <header>
+            <figure class="logo">
+                <a class="nav-link" href="{% url 'index' %}">
+                    <img src="../../static/Images/Logo_PWPP.svg" alt="logo">
+                </a>    
+            </figure>
+
+{% if user.is_authenticated %}
+            <div class="header-end">
+                <div class="bur-menu">
+                    <a href="#menu" id="toggle"><span></span></a>
+                    <div id="menu">
+                        <ul>
+                        <li>
+                            <a href="{% url 'index' %}">
+                                <span style="color: turquoise;" class="lnr lnr-coffee-cup"></span> All Posts
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'profile' request.user %}">
+                                <span style="color: turquoise;" class="lnr lnr-user"></span> My profile
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'follow_user'%}">
+                                <span style="color: turquoise;" class="lnr lnr-users"></span> Following
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'bio' %}">
+                                <span style="color: turquoise;" class="lnr lnr-diamond"></span> Complete your bio
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'logout' %}">
+                                <span style="color: turquoise;" class="lnr lnr-exit"></span> Log Out
+                            </a>
+                        </li>
+                        </ul>
+                    </div>
+                </div>
+                <div title="Logged as @{{ profile.user.username }}" class="little-avatar">
+                    <img src="{{ profile.avatar }}" alt=""> 
+                </div> 
+
+            </div>    
+{% endif %}     
+        </header>
+        
+        <div class="container shadow">
+           
+{% block body %}
+{% endblock %}
+
+{% block script %}
+        <script src="{% static 'network/index.js' %}"></script>
+{% endblock %}
+
+        </div>
+    </body>
+</html>

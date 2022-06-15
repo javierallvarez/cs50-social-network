@@ -1,0 +1,53 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+
+    <aside class="profile-card inner-shadow">  
+        <div class="little-banner ">
+            <img src="../../static/Images/noPhoto.png" alt="">
+        </div>  
+    </aside>
+
+    <div class="welcome-bio inner-shadow"> 
+        <h3>Register</h3> 
+        <p>Join us if you are People Who Paint People!</p> 
+        <p>Or just take a look to <a href="{% url 'index' %}"> <strong>all posts</strong></a>.</p>
+    </div>
+
+    <form action="{% url 'register' %}" method="post" class="form-bio inner-shadow">
+{% csrf_token %}
+        <div class="form-name">
+            <div class="name">
+                <p>Your first name:</p>
+                <input class="my-form" autofocus type="text" name="first_name" placeholder="First name">
+            </div>
+            <div class="name">
+                <p>Your last name:</p>
+                <input class="my-form" autofocus type="text" name="last_name" placeholder="Last name">
+            </div>    
+        </div>
+        <div>
+            <p>Choose your alias:</p>
+            <input class="my-form" autofocus type="text" name="username" placeholder="Username">
+        </div>
+        <div>
+            <p>Your email:</p>
+            <input class="my-form" type="email" name="email" placeholder="Email Address">
+        </div>
+        <div>
+            <p>Choose a stong password:</p>
+            <input class="my-form" type="password" name="password" placeholder="Password">
+        </div>
+        <div>
+            <p>Now repeat it:</p>
+            <input class="my-form" type="password" name="confirmation" placeholder="Confirm Password">
+        </div>
+        <input style="margin-top: 20px;" class="button" type="submit" value="Register">
+    </form>
+
+{% if message %}
+    <div>{{ message }}</div>
+{% endif %}
+
+
+{% endblock %}

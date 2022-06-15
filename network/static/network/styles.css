@@ -1,0 +1,510 @@
+.container {
+  width: 100vw;
+  height: 90vh;
+  background: url("../../static/Images/Background.png");
+  background-size: cover;
+  background-position: top left;
+  background-repeat: no-repeat;
+  position: absolute;
+  border-radius: 2rem 2rem 0 0;
+  display: grid;
+  grid-template-columns: 2rem 1fr 2fr 1fr 2rem;
+  grid-template-rows: 2rem repeat(3, 1fr) 3rem;
+  grid-column-gap: 2rem;
+  grid-row-gap: 1.5rem;
+}
+
+/* --------------HEADER----------------- */
+
+header {
+  width: 100vw;
+  height: 10vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  margin: 0 0 0 7rem;
+}
+
+.little-avatar {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  border: 3px solid var(--linked);
+}
+
+.little-avatar img {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.header-end {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin: 0 7rem 0 0;
+}
+
+/* --------------BIO.HTML----------------- */
+
+.welcome-bio {
+  grid-area: 2 / 3 / 3 / 5;
+  padding-left: 2rem;
+  background-color: var(--primary);
+  border-radius: 1rem;
+}
+
+.form-bio {
+  grid-area: 3 / 3 / 4 / 5;
+  background-color: var(--primary);
+  border-radius: 1rem;
+  padding: 10px 0 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-name {
+  display: flex;
+}
+
+.name {
+  width: 47%;
+}
+
+.label {
+  width: auto;
+}
+
+.my-form {
+  background-color: var(--forms);
+  border-radius: 1rem;
+  border: none;
+  padding: 10px;
+  font-family: var(--font-1);
+  width: 90%;
+  color: var(--link);
+}
+
+/* --------------PROFILE-CARD----------------- */
+
+.profile-card {
+  grid-area: 2 / 2 / 5 / 3;
+  background: var(--primary);
+  border-radius: 1rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.little-banner {
+  width: 100%;
+  height: 45%;
+  border-radius: 1rem 1rem 0 0;
+}
+
+.little-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 1rem 1rem 0 0;
+}
+
+.avatar {
+  width: 7rem;
+  height: 7rem;
+  border-radius: 50%;
+  border: 3px solid var(--linked);
+}
+
+.avatar img {
+  width: 7rem;
+  height: 7rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user {
+  line-height: 2px;
+  position: absolute;
+  top: 39%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.alias {
+  color: var(--gray); 
+}
+
+.bio {
+  width: 80%;
+  height: 10%;
+  font-weight: 400;
+  font-family: var(--font-2);
+  font-size: 18px;
+  padding: 10px;
+  margin-top: 5rem;
+  border-radius: 10px;
+  background-image: linear-gradient(
+    to bottom,
+    #215474 0%,
+    var(--forms) 20%,
+    #183e56 65%,
+    var(--primary) 100%
+  );
+}
+
+hr {
+  width: 80%;
+  height: 1px;
+  background: gray;
+  border: none;
+}
+
+.card-footer {
+  width: 100%;
+  height: 15%;
+  display: flex;
+  justify-content: space-evenly;
+  background-image: linear-gradient(
+    to bottom,
+    var(--primary) 0%,
+    #091924 20%,
+    #061016 95%,
+    #020609 100%
+  );
+  border-radius: 0 0 1rem 1rem;
+  border-top: 3px var(--link) solid;
+  align-items: center;
+}
+
+.card-footer h3 {
+  color: var(--link);
+  font-size: 30px;
+  margin: 0;
+}
+
+.card-footer p {
+  margin: 0;
+}
+
+/* --------------ALL-POSTS----------------- */
+
+.posting {
+  border-radius: 1rem;
+  display: flex;
+  background: var(--primary);
+  padding: 2rem 1rem 1rem 1rem;
+}
+
+.posts-wrapper {
+  grid-area: 2 / 3 / 5 / 4;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow: scroll;
+}
+
+.all-posts {
+  border-radius: 1rem;
+  display: flex;
+  background: var(--primary);
+  height: fit-content;
+  padding: 2rem 1rem 1rem 1rem;
+}
+
+.post-avatar {
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0 10px;
+}
+
+#comment {
+  width: 80%;
+}
+
+.posted {
+  width: 80%;
+}
+
+.user-name p,
+.user-name h4 {
+  margin: 0;
+}
+
+.comment-body {
+  font-family: var(--font-2);
+  font-size: 18px;
+  font-weight: 300;
+  padding: 2rem 0;
+}
+
+.actions {
+  display: flex;
+  gap: 2rem;
+}
+
+.lnr{
+  cursor: pointer;
+}
+
+.may-know-card {
+  grid-area: 2 / 4 / 5 / 5;
+  background: var(--primary);
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* padding-top: 1rem; */
+  overflow: scroll;
+}
+
+.not-followed{
+  width: 80%;
+  height: 10%;
+  display: flex;
+  padding: 1rem;
+  gap: 1rem;
+  background: var(--forms);
+  margin: 10px;
+  border-radius: 10px;
+}
+
+.alert-msg{
+  text-align: center;
+  background-color: var(--forms);
+  border-radius: 10px;
+}
+
+.edit-box{
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem 0;
+}
+
+.like-box{
+  display: flex;
+}
+
+.postLikes{
+  margin: 0 5px;
+}
+
+/* --------------PAGINATION----------------- */
+
+.paginator-box {
+  grid-area: 5 / 3 / 6 / 4;
+  display: flex;
+  justify-content: center;
+}
+
+.pagination {
+  width: 50%;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  background-color: var(--primary);
+  border-radius: 1rem;
+  padding: 5px;
+  margin-top: -10px;
+  font-size: 12px;
+}
+
+/* --------------LOGIN----------------- */
+
+#login {
+  height: 90%;
+  width: 80%;
+  margin-top: 2rem;
+}
+
+/* --------------MENU----------------- */
+.bur-menu {
+  width: 40px;
+  height: 30px;
+  position: relative;
+  z-index: 1;
+}
+
+#toggle {
+  display: block;
+  width: 40px;
+  height: 25px;
+  margin: 18px 0;
+}
+
+#toggle span:after,
+#toggle span:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -9px;
+}
+
+#toggle span:after {
+  top: 9px;
+}
+
+#toggle span {
+  position: relative;
+  display: block;
+}
+
+#toggle span,
+#toggle span:after,
+#toggle span:before {
+  width: 100%;
+  height: 5px;
+  background-color: var(--link);
+  transition: all 0.3s;
+  backface-visibility: hidden;
+  border-radius: 2px;
+}
+
+/* on activation */
+#toggle.on span {
+  background-color: transparent;
+}
+
+#toggle.on span:before {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+#toggle.on span:after {
+  transform: rotate(-45deg) translate(7px, -8px);
+  background: var(--linked);
+}
+
+#toggle.on + #menu {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* menu appearance*/
+#menu {
+  position: relative;
+  width: max-content;
+  padding: 1rem;
+  margin: auto;
+  border-radius: 4px;
+  background: var(--forms);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.8s;
+}
+
+#menu:after {
+  position: absolute;
+  top: -15px;
+  left: 0px;
+  content: "";
+  display: block;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 20px solid var(--forms);
+}
+
+#menu ul,
+#menu li,
+#menu li,
+#menu a {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* --------------PROFILE----------------- */
+
+.user-posts-wrapper{
+  grid-area: 2 / 3 / 5 / 4;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow: scroll;
+}
+
+.big-banner{
+  height: 45%;
+  border-radius: 1rem;
+  display: flex;
+  background: var(--primary);
+}
+
+.big-banner img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 1rem;
+  animation-name: flicker-in;
+  animation-duration: 15s;
+  animation-timing-function: cubic-bezier();
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: none;
+}
+@keyframes flicker-in {
+  0% {
+    object-position: top;
+  }
+  
+  50% {
+    object-position: bottom;
+  }
+ 
+  100% {
+    object-position: top;
+  }
+
+}
+
+.right-banner{
+  width: 100%;
+  height: 100%;
+}
+
+.right-banner img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+    object-position: top;
+}
+
+.user-profile{
+  
+  width: 90%;
+  font-size: 18px;
+}
+
+.profile-bio{
+  height: 30%;
+  line-height: 30px;
+  font-weight: 400;
+  font-family: var(--font-2);
+  padding: 2rem 1rem;
+  margin: 1rem; 
+  border-radius: 10px;
+  background-image: linear-gradient(
+    to bottom,
+    var(--linked) 0%,
+    var(--forms) 5%,
+    #183e56 65%,
+    var(--primary) 100%
+  ); 
+}
+
+.arroba{
+  font-size: 14px;
+  margin-bottom: 1rem;
+}

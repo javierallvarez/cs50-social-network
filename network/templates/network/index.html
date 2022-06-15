@@ -1,0 +1,217 @@
+{% extends "network/layout.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block body %}
+<aside class="profile-card inner-shadow">            
+    {% if user.is_authenticated %}
+        <div class="little-banner inner-shadow">
+            <img src="{{ profile.banner }}" alt="">
+        </div>   
+        <div class="user">
+            <div title="Logged as @{{ profile.user }}" class="avatar">
+                <a class="nav-link" href="{% url 'profile' profile.user %}">               
+                    <img src="{{ profile.avatar }}" alt="">
+                </a>     
+            </div> 
+            <a class="nav-link" href="{% url 'profile' profile.user %}">
+                <h4>{{ user.first_name|capfirst }} {{ user.last_name|capfirst }}</h4> 
+            </a>    
+            <p class="alias resetter">@{{ request.user }}</p> 
+        </div> 
+        <p class="bio">'{{ profile.bio }}'</p> 
+        <div class="card-footer">
+            <div class="card-footer-a">
+                <p>Followers</p>
+                <h3>{{ profile.follower.count }}</h3>
+            </div>
+            <div class="card-footer-b">
+                <p>Following</p>
+                <h3>{{ profile.following.count }}</h3>
+            </div>    
+        </div>
+    {% else %}
+        <div class="little-banner">
+            <img src="../../static/Images/add-user.png" alt=""> 
+        </div>        
+        <form action="{% url 'login' %}" method="post" id="login">
+        {% csrf_token %}
+        <div>
+            <input autofocus class="my-form" style="margin-bottom: 10px;" type="text" name="username" placeholder="Username">
+        </div>
+        <div>
+            <input class="my-form" style="margin-bottom: 10px;" type="password" name="password" placeholder="Password">
+        </div>
+        <input class="button" type="submit" value="Login"> 
+        <p>     
+            Don't have an account? <a href="{% url 'register' %}"><strong>Register here</strong></a>.
+        </p>
+    {% endif %}    
+        <!-- Invalid username and/or password message: -->
+        {% if message %}
+            <div style="color: red;">{{ message }}</div>
+        {% endif %}
+    </form>               
+    
+</aside>
+
+
+<!-- Show posting form and all posts below: -->
+<div class="posts-wrapper">
+    <!-- The posting box is only visible when the user is logged: -->
+    {% if user.is_authenticated %}   
+        <div class="posting inner-shadow">
+            <figure class="post-avatar">
+                <div title="Logged as @{{ profile.user }}" class="little-avatar">           
+                    <img src="{{ profile.avatar }}" alt=""/>
+                </div>
+            </figure>
+            <div id="comment">
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div>{{ postForm.comment }}</div>
+                    <input id="submit" type="submit" class="button" value="Post" />
+                </form>
+            </div>
+        </div>
+    {% endif %}
+
+    <!-- Show an alert message when a post is deleted: -->
+    <div id="alert_message"></div> 
+
+    <!-- Show all posts: -->
+    {% for post in page_obj %}        
+        <article class="all-posts inner-shadow" id="comment-{{post.id}}">
+            <figure class="post-avatar">
+                <div title="@{{ post.user }}" class="little-avatar">
+                    <!-- Only logged users can click in user's avatar as link to their profile: -->
+                    {% if user.is_authenticated %}
+                        <a class="nav-link" href="{% url 'profile' post.user %}">
+                            <img src="{{ post.profile.avatar }}" alt="" />
+                        </a>
+                    {% else %}
+                        <img src="{{ post.profile.avatar }}" alt="" />
+                    {% endif %}    
+                </div>
+            </figure>
+            <div class="posted">
+                <div class="user-name">
+                    <!-- brackets modelo/campo/campoDelQueHereda brackets -->
+                    <a class="nav-link" href="{% url 'profile' post.user %}">    
+                        <h4>
+                            {{ post.user.first_name|capfirst }} {{ post.user.last_name|capfirst }}
+                        </h4>
+                    </a>    
+                    <p>@{{ post.user }}</p>
+                </div>
+                <small class="alias">Created {{ post.time|naturaltime }}</small>
+                <!-- Show the post body and hide it the editView till click on Edit -->
+                <div id="postView-{{post.id}}" class="comment-body">
+                    <p style="margin: 0;">{{ post.comment }}</p>
+                </div>    
+                <div id="editView-{{post.id}}" class="edit-box" style="display: none;">
+                    <textarea class="my-form" id="content-{{post.id}}" rows="5" data-id="{{post.id}}">{{ post.comment }}</textarea>
+                    <div>
+                        <button id="save-{{post.id}}" value="save" class="button">Save</button>
+                        <button id="cancel-{{post.id}}" class="button">Cancel</button>
+                    </div>
+                </div>
+                {% if user.is_authenticated %}
+                    <div class="actions">
+                        <!-- If the logged user is the same who created the post will be able to see the number of Likes, edit and delete posts: -->     
+                        {% if request.user == post.user %}  
+                            <p id="likePost" style="margin: 0;">
+                                <span class="lnr lnr-thumbs-up" style="cursor: auto;"></span>
+                                {{ post.like.count }}
+                            </p>  
+                            <a class="edit" id="editButton-{{post.id}}" data-id="{{post.id}}" title="Edit Post"> 
+                                <span class="lnr lnr-pencil"></span>
+                            </a>
+                            <a class="delete" id="deletePost-{{post.id}}" data-id="{{post.id}}" title="Delete Post"> 
+                                <span class="lnr lnr-trash"></span>
+                            </a>
+                        {% else %}                           
+                            <!-- If the logged user clicks Like on posts from other people, the icon becomes turquoise. It is not possible to click Like on own posts. -->
+                            {% if request.user in post.like.all %}
+                                <div class="like-box" title="Unlike">
+                                    <a class="unlike clickLike turq" data-id="{{post.id}}" id="unlikePost-{{post.id}}">
+                                        <span class="lnr lnr-thumbs-up"></span>
+                                    </a>
+                                    <p id="postLikes-{{post.id}}" class="postLikes">
+                                        {{ post.like.count }}
+                                    </p>    
+                                </div>       
+                            {% else %} 
+                                <div class="like-box" title="Like"> 
+                                    <a class="like" data-id="{{post.id}}" id="likePost-{{post.id}}">
+                                        <span class="lnr lnr-thumbs-up"></span>
+                                    </a>
+                                    <p id="postLikes-{{post.id}}" class="postLikes">
+                                        {{ post.like.count }}
+                                    </p>
+                                </div>     
+                            {% endif %}
+                        {% endif %}                      
+                    </div>
+                {% endif %}    
+            </div>
+        </article>
+    {% endfor %}
+</div>
+
+<div class="paginator-box">
+    <div class="pagination inner-shadow">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">&laquo; previous</a>
+        {% endif %}   
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+            </span>
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next &raquo;</a>
+        {% endif %}     
+    </div>
+</div>
+
+
+<!-- Show users who are in the following list -->
+    <aside class="may-know-card inner-shadow">
+        {% if user.is_authenticated %}
+            <h3>People who paint people:</h3>
+            {% for followed in allProfiles %}         
+                    <div class="not-followed">    
+                        <figure class="post-avatar">
+                            <div title="@{{ followed }}" class="little-avatar">
+                                <a href="{% url 'profile' followed %}">
+                                    <img src="{{ followed.avatar }}" alt="" />                   
+                                </a>    
+                            </div>
+                        </figure>
+                        <div class="user-name">
+                            <a href="{% url 'profile' followed %}">
+                                <h4>
+                                    {{ followed.user.first_name|capfirst }} {{ followed.user.last_name|capfirst }}
+                                </h4>
+                            </a>    
+                                <small class="gray">@{{ followed }}</small>
+                                <br>
+                                <small>'{{ followed.bio }}'</small>
+                        </div>            
+                    </div>    
+             
+            {% endfor %}
+        {% else %}
+            <div class="little-banner">
+                <figure>
+                    <img src="../../static/Images/noPhoto.png" alt="">
+                </figure>
+            </div>
+        {% endif %}    
+    </aside>
+
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'network/index.js' %}"></script>
+{% endblock %}

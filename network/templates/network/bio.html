@@ -1,0 +1,43 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+    <div class="welcome-bio inner-shadow ghost"> 
+        <h3>Hello {{ request.user }}!</h3> 
+        <p>Please, take a minute to complete your profile.</p> 
+    </div>
+
+{% if message %}
+    <div>{{ message }}</div>
+{% endif %}
+
+    <aside class="profile-card inner-shadow">  
+        <div class="little-banner ">
+            <img src="../../static/Images/noPhoto.png" alt="">
+        </div>   
+    </aside>
+
+    <form action="{% url 'bio' %}" method="post" class="form-bio inner-shadow" >
+        {% csrf_token %}
+        <div>
+           <label for="avatar"><p>Profile picture:</p></label> {{ profileForm.avatar }}
+        </div>
+        <div>
+           <label for="banner"><p>Header picture:</p></label> {{ profileForm.banner }}
+        </div>
+        <div>
+           <label for="banner"><p>Side picture:</p></label> {{ profileForm.banner_side }}
+        </div>
+        <div>
+            <label for="bio"><p>About you:</p></label> {{ profileForm.bio }}
+        </div>
+        <input class="button" type="submit" value="Save">
+    </form>
+
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'network/index.js' %}"></script>
+{% endblock %}

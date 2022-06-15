@@ -1,0 +1,106 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,400;0,800;1,100;1,400;1,800&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;600;800&display=swap');
+
+:root {
+    --primary: #0D2331;
+    --primary_opacity: #0d2331ab;
+    --linked: turquoise;
+    --link: #229DE7;
+    --forms: #183D54;
+    --gray: rgb(200, 200, 200);
+    --hotgreen_opacity: #33e5833d;
+    --font-1: "Poppins", sans-serif;
+    --font-2: 'Abhaya Libre', serif;
+  }
+
+html {
+    scroll-behavior: smooth;
+    
+}
+
+body {
+    width: 100vw;
+    color: white;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    background: #0D2331;
+    margin: 0;
+    padding: 0;
+}
+
+a{
+    text-decoration: none;
+    color: var(--link);
+}
+
+a:hover{
+    text-decoration: none;
+    color: var(--linked);
+}
+
+.button {
+	background-image: linear-gradient(to right, var(--link) 0%, var(--linked) 95%, #84fab0 100%);
+	border-radius: 5px;
+	border: none;
+	display: inline-block;
+	cursor: pointer;
+	color: #ffffff;
+    width: 6rem;
+    height: 2rem;
+	text-transform: uppercase;
+	font-weight: 900;
+    font-size: 10px;
+	text-decoration: none;
+    margin: 6px 0;
+}
+
+.button:hover {
+    background-position: bottom center;
+    transition: 0.6s;
+    box-shadow: 8px 8px 0px 0px var(--linked);
+}
+
+.inner-shadow{
+    box-shadow: 
+    inset 0px 10px 5px -4px rgba(22, 56, 67, 0.743),
+    inset 0px -12px 5px -4px #0b1c27, 
+    inset 0px -14px 5px -4px #0d2330;
+}
+
+.shadow{
+    box-shadow: 
+    inset -10px 0px 5px 0px rgba(0,0,0,0.44), 
+    inset 10px 11px 5px -4px rgba(128, 128, 128, 0.44);
+}
+
+.outer-shadow{
+    box-shadow: 1px 5px 5px 0px rgba(33, 33, 33, 0.55);
+}
+
+.flex-center{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+::-webkit-scrollbar {
+    display: none;
+  }
+
+
+.blu{
+    color: var(--link);
+}
+
+.turq{
+    color: var(--linked);
+}
+
+.gray{
+    color: var(--gray);
+}
+
+.resetter{
+    margin: 0;
+}
